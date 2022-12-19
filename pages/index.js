@@ -1,43 +1,24 @@
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 
-const ACCESS_TOKEN = 'WOttAMeBZi2yR3XImaEzIOCqrDBD9k'
+import { fetchHospitalList } from '../store/hospital-list-actions';
 
 export default function Home() {
-
-  const fetchHospitalList = async () => {
-    const fetchHospitalListData = async () => {
-      const response = await fetch('https://recruit.modoodoc.com/hospitals/', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': `Bearer ${ACCESS_TOKEN}`
-        }
-      });
-
-      if (!response.ok) {
-
-      }
-
-      const data = await response.json();
-
-      return data;
-    }
-
-    try {
-      const hospitalListData = await fetchHospitalListData();
-      console.log("hospitalListData!")
-      console.log(hospitalListData);
-    } catch (error) {
-
-    }
-
-  }
-
+  const dispatch = useDispatch();
+  const hospitalList = useSelector(state => state.hospitalList.hospitalList);
+  
   useEffect(() => {
-    fetchHospitalList();
+    dispatch(fetchHospitalList());
   }, [fetchHospitalList])
 
   return (
-    <div>Wow!</div>
+    <Fragment>
+      <div>Wow!</div>
+      {hospitalList && hospitalList.map((hospital) => (
+        <div>1</div>
+      ))}
+    </Fragment>
+    
+    
   )
 }
