@@ -25,9 +25,6 @@ export const fetchHospitalList = () => {
         try {
             const hospitalListData = await fetchHospitalListData();
             dispatch(hospitalListActions.replaceHospitalList(hospitalListData));
-    
-            console.log("hospitalListData!")
-            console.log(hospitalListData);
         } catch (error) {
             console.log('ERROR!');
             console.log(error);

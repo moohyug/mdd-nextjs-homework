@@ -8,7 +8,7 @@ const hospitalListSlice = createSlice({
     },
     reducers: {
         replaceHospitalList(state, action) {
-            state.hospitalList = action.payload.hospitalList;
+            state.hospitalList = action.payload.hospitals;
         }
     }
 })

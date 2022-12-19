@@ -1,56 +1,31 @@
-import { useEffect, useCallback } from 'react';
+import { Fragment, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Link from 'next/link';
 
-const ACCESS_TOKEN = 'WOttAMeBZi2yR3XImaEzIOCqrDBD9k';
+import { fetchReviewList } from '../../../store/review-list-actions';
 
 const HospitalDetail = (props) => {
-
-    const fetchReviewList = async () => {
-        const fetchReviewListData = async () => {
-            const response = await fetch(`https://recruit.modoodoc.com/hospitals/${props.hospitalId}/reviews/?search_query=&page=1&size=5`, {
-                method: 'GET',
-                headers: {
-                  'Content-Type': 'application/x-www-form-urlencoded',
-                  'Authorization': `Bearer ${ACCESS_TOKEN}`
-                }
-              });
-        
-              if (!response.ok) {
-        
-              }
-        
-              const data = await response.json();
-        
-              return data;
-        }
-
-        try {
-            const reviewListData = await fetchReviewListData();
-            console.log("reviewListData!")
-            console.log(reviewListData);
-        } catch (error) {
-    
-        }
-    }
+    const dispatch = useDispatch();
+    const reviewList = useSelector(state => state.reviewList.reviewList);
 
     useEffect(() => {
-        fetchReviewList();
-    }, [fetchReviewList])
+        dispatch(fetchReviewList(props));
+    }, [dispatch])
 
     return (
-        <div>병원 리스트 페이지!</div>
+        <Fragment>
+            {reviewList && reviewList.map((review) => (
+                <div key={review.id}>
+                    <Link href={`/reviews/${review.id}`}>{review.contents}</Link>
+                </div>
+            ))}
+        </Fragment>
+
     )
 }
 
-export const getStaticPaths = async () => {
-    return {
-        fallback: 'blocking',
-        paths: [{params: {hospitalId: '1'}}, {params: {hospitalId: '2'}}] // dummy data 우선 채움. 
-    }
-}
-
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
     const hospitalId = context.params.hospitalId;
-    console.log(hospitalId);
 
     return {
         props: {
@@ -58,4 +33,5 @@ export const getStaticProps = async (context) => {
         }
     }
 }
+
 export default HospitalDetail;
