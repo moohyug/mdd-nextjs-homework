@@ -9,7 +9,7 @@ export default function Home() {
   
   useEffect(() => {
     dispatch(fetchHospitalList());
-  }, [fetchHospitalList])
+  }, [dispatch])
 
   return (
     <Fragment>
