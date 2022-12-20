@@ -1,31 +1,13 @@
 import { Fragment, useCallback, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
-
-import { fetchReviewList } from '../../../store/review-list-actions';
-import { reviewListActions } from '../../../store/review-list-slice';
 
 import { reviewShortDetail } from '../../../components/Review/ReviewShortDetail.module.css';
 
 const ACCESS_TOKEN = 'WOttAMeBZi2yR3XImaEzIOCqrDBD9k';
 
-let isInitial = true;
-
 const HospitalDetail = (props) => {
     const hospitalId = props.hospitalId;
 
-    const dispatch = useDispatch();
-    // reviewListSlice 정보 초기화
-    const initializeReviewListHandler = useCallback(() => {
-        console.log('init');
-        dispatch(reviewListActions.initializeReviewList({
-            reviewList: props.reviewList
-        }))
-    }, []);
-
-    const reviewList = useSelector(state => state.reviewList.reviewList);
-    const searchQuery = useSelector(state => state.reviewList.searchQuery);
-    const page = useSelector(state => state.reviewList.page);
     const loader = useRef(null);
 
     // 2. 치료항목 클릭할 때
@@ -43,13 +25,7 @@ const HospitalDetail = (props) => {
         const target = entries[0];
         if (target.isIntersecting) {
             console.log('intersected!');
-            dispatch(reviewListActions.incrementPage())
-            // // 리뷰 리스트 추가 로딩
-            // dispatch(fetchReviewList({
-            //     hospitalId: hospitalId,
-            //     searchQuery: searchQuery,
-            //     page: page,
-            // }))
+
         }
     }, [])
 
