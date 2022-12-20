@@ -1,4 +1,5 @@
-import { Fragment, useCallback, useEffect, useRef } from 'react';
+import { Fragment, useCallback, useEffect, useRef, useState } from 'react';
+import { useFetchReviewList } from '../../../hook/useFetch';
 import Link from 'next/link';
 
 import { reviewShortDetail } from '../../../components/Review/ReviewShortDetail.module.css';
@@ -7,6 +8,9 @@ const ACCESS_TOKEN = 'WOttAMeBZi2yR3XImaEzIOCqrDBD9k';
 
 const HospitalDetail = (props) => {
     const hospitalId = props.hospitalId;
+    const [page, setPage] = useState(1);
+    const [searchQuery, setSearchQuery] = useState('');
+    const { reviewList } = useFetchReviewList(hospitalId, searchQuery, page, props.reviewList);
 
     const loader = useRef(null);
 
@@ -25,12 +29,8 @@ const HospitalDetail = (props) => {
         const target = entries[0];
         if (target.isIntersecting) {
             console.log('intersected!');
-
+            setPage((prev) => prev+1);
         }
-    }, [])
-
-    useEffect(() => {
-        initializeReviewListHandler();
     }, [])
 
     useEffect(() => {
@@ -48,17 +48,7 @@ const HospitalDetail = (props) => {
         return () => {
             observer.disconnect();
         }
-    }, [loader, initializeReviewListHandler, loadMoreHandler])
-
-    useEffect(() => {
-        if (isInitial){
-            isInitial = false;
-            return;
-        }
-        console.log('page3');
-        console.log(page);
-        console.log(searchQuery);
-    }, [searchQuery, page])
+    }, [loader, loadMoreHandler])
 
     return (
         <Fragment>
