@@ -1,34 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## 배경정보
+모두닥의 멤버 무무는 대대적인 리빌딩에 앞서 새로이 리빌딩할 코드의 새로운 기술스택을 학습함으로써 리빌딩 과정에 긴밀히 참여함으로써 리빌딩을 성공적으로 마무리할 수 있는데 기여한다. 해당 github 프로젝트는 이러한 목표의 일환이다. 
 
-## Getting Started
+프로젝트의 개발진행 순서 및 참고자료는 다음 [링크](https://www.notion.so/modoodoc/react-014acdb3b66a497391be4094a00042bb)에서 참조 가능하다. CSS styling 및 Typescript 작업은 시간관계상 진행하지 않았다. 
 
-First, run the development server:
+사전과제 중에서도 다음 기능들을 구현하였다. 
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+1. 홈(병원리스트) <-> 리뷰리스트 <-> 리뷰상세 페이지로의 링크 이동 : next/link, next/router 활용
+2. getServerSideProps 함수를 활용하여 SSR 기능 구현
+3. react hook를 활용하여 리뷰리스트에서 1) infinite scroll, 2) 치료항목 버튼 클릭, 3) 검색 기능 구현
+4. redux toolkit 을 활용하여 홈의 병원리스트 정보를 저장 및 렌더링. 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 개발스택
+- Javascript 
+- React
+- Redux
+- Redux toolkit
+- Next.js
