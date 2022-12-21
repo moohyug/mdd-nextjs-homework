@@ -73,7 +73,7 @@ const HospitalDetail = (props) => {
             </div>
             {reviewList && reviewList.map((review) => (
                 <div className={reviewShortDetail} key={review.id}>
-                    <Link href={`/reviews/${review.id}`}>
+                    <Link href={`/hospitals/${hospitalId}/reviews/${review.id}`}>
                         {review.treatment_prices.map(((tp) => (
                             <div><p>{tp.name}</p><p>{tp.price}</p></div>
                         )))}
