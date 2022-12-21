@@ -10,6 +10,10 @@
 3. react hook를 활용하여 리뷰리스트에서 1) infinite scroll, 2) 치료항목 버튼 클릭, 3) 검색 기능 구현
 4. redux toolkit 을 활용하여 홈의 병원리스트 정보를 저장 및 렌더링. 
 
+최종 사전과제를 확인할 수 있는 링크는 다음과 같다. Vercel을 이용하여 deploy 하였다. 
+
+(https://mdd-nextjs-homework.vercel.app/)
+
 ## 개발스택
 - Javascript 
 - React
