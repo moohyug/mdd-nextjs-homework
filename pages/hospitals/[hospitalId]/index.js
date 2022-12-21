@@ -15,13 +15,21 @@ const HospitalDetail = (props) => {
     const loader = useRef(null);
 
     // 2. 치료항목 클릭할 때
-    const clickTcButtonHandler = () => {
+    const clickTcButtonHandler = (event) => {
+        event.preventDefault();
+        console.log(event.target.value);
 
+        setSearchQuery(event.target.value);
+        setPage(1);
     }
 
     // 3. 검색어 기입 후  검색할 때  
-    const searchQueryEnterHandler = () => {
+    const searchQuerySubmitHandler = (event) => {
+        event.preventDefault();
+        console.log(event.target);
 
+        setSearchQuery(event.target.query.value);
+        setPage(1);
     }
     
     // 4. infinite scroll 
@@ -52,9 +60,30 @@ const HospitalDetail = (props) => {
 
     return (
         <Fragment>
+            <form onSubmit={searchQuerySubmitHandler}>
+                <label>
+                    <input type="text" name="query" />
+                </label>
+                <input type="submit" value="검색" />
+            </form>
+            <div>
+                <button key='12345' onClick={clickTcButtonHandler} value="사랑니 발치" style={{backgroundColor: 'purple'}}>사랑니 발치</button>
+                <button key='12346' onClick={clickTcButtonHandler} value="임플란트" style={{backgroundColor: 'purple'}}>임플란트</button>
+                <button key='12347' onClick={clickTcButtonHandler} value="치아교정" style={{backgroundColor: 'purple'}}>치아교정</button>
+            </div>
             {reviewList && reviewList.map((review) => (
                 <div className={reviewShortDetail} key={review.id}>
-                    <Link href={`/reviews/${review.id}`}>{review.contents}</Link>
+                    <Link href={`/reviews/${review.id}`}>
+                        {review.treatment_prices.map(((tp) => (
+                            <div><p>{tp.name}</p><p>{tp.price}</p></div>
+                        )))}
+                        <br />
+                        <p>{review.contents}</p>
+                    </Link>
+                    <br />
+                    <div>
+                        <button>도움됐어요 {review.liked_cnt}</button>
+                    </div>
                 </div>
             ))}
             <div ref={loader} />

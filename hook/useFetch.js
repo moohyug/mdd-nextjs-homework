@@ -31,15 +31,15 @@ export const useFetchReviewList = (hospitalId, searchQuery, page, initReviewList
             newReviewList = reviewListData.reviews;
             console.log(newReviewList);
             let existing = false;
-            if (newReviewList){
+            if (newReviewList && typeof newReviewList[0] !== 'undefined'){
                 existing = reviewList.find(item => item.id === newReviewList[0].id);
             }
 
             if (page === 1 && !searchQuery) {
                 console.log('case1')
-                setReviewList(newReviewList);
             } else if (page === 1 && searchQuery) {
                 console.log('case2')
+                setReviewList(newReviewList);
             } else if (!existing) {
                 console.log('case3')
                 setReviewList((prev) => [...prev, ...newReviewList]);
