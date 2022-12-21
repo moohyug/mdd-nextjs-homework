@@ -1,12 +1,15 @@
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react';
 import { useFetchReviewList } from '../../../hook/useFetch';
 import Link from 'next/link';
+import { useRouter } from 'next/router'
 
 import { reviewShortDetail } from '../../../components/Review/ReviewShortDetail.module.css';
 
 const ACCESS_TOKEN = 'WOttAMeBZi2yR3XImaEzIOCqrDBD9k';
 
 const HospitalDetail = (props) => {
+    const router = useRouter();
+        
     const hospitalId = props.hospitalId;
     const [page, setPage] = useState(1);
     const [searchQuery, setSearchQuery] = useState('');
@@ -60,6 +63,9 @@ const HospitalDetail = (props) => {
 
     return (
         <Fragment>
+            <button type="button" onClick={() => router.back()}>
+                뒤로가기
+            </button>
             <form onSubmit={searchQuerySubmitHandler}>
                 <label>
                     <input type="text" name="query" />
